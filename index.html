@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="ECO: Incremental Ego-Centric Octree Update for Point Streams - Jaemin Yu, Seongyoon Jeong, Kang-Wook Chon, Duksu Kim">
+  <meta name="description" content="ECO is an Ego-Centric Octree that acts as a 3D sliding window for point streams, enabling fast, bounded, and balanced incremental octree updates for real-time mobile robotics.">
+  <meta name="keywords" content="Ego-Centric Octree, Incremental Octree, LiDAR mapping, Range Sensing, 3D sliding window, Point Cloud, Mobile Robotics, KITTI, Real-time Mapping">
+  <meta name="author" content="Jaemin Yu, Seongyoon Jeong, Kang-Wook Chon, Duksu Kim">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="KOREATECH">
+  <meta property="og:title" content="ECO: Incremental Ego-Centric Octree Update for Point Streams">
+  <meta property="og:description" content="ECO is an Ego-Centric Octree that acts as a 3D sliding window for point streams, enabling fast, bounded, and balanced incremental octree updates for real-time mobile robotics.">
+  <!-- TODO: Replace with your actual website URL -->
+  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ECO: Incremental Ego-Centric Octree Update for Point Streams - Research Preview">
+  <meta property="article:published_time" content="2026-07-06T00:00:00.000Z">
+  <meta property="article:author" content="Jaemin Yu">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="Ego-Centric Octree">
+  <meta property="article:tag" content="Incremental Octree">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- TODO: Replace with your lab/institution Twitter handle -->
+  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
+  <!-- TODO: Replace with first author's Twitter handle -->
+  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
+  <meta name="twitter:title" content="ECO: Incremental Ego-Centric Octree Update for Point Streams">
+  <meta name="twitter:description" content="ECO is an Ego-Centric Octree that acts as a 3D sliding window for point streams, enabling fast, bounded, and balanced incremental octree updates for real-time mobile robotics.">
+  <!-- TODO: Same as social preview image above -->
+  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="ECO: Incremental Ego-Centric Octree Update for Point Streams - Research Preview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="ECO: Incremental Ego-Centric Octree Update for Point Streams">
+  <meta name="citation_author" content="Yu, Jaemin">
+  <meta name="citation_author" content="Jeong, Seongyoon">
+  <meta name="citation_author" content="Chon, Kang-Wook">
+  <meta name="citation_author" content="Kim, Duksu">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="arXiv preprint">
+  <meta name="citation_arxiv_id" content="2607.05092">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2607.05092.pdf">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <title>ECO: Incremental Ego-Centric Octree Update for Point Streams | KOREATECH</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "ECO: Incremental Ego-Centric Octree Update for Point Streams",
+    "description": "ECO is an Ego-Centric Octree that acts as a 3D sliding window for point streams, enabling fast, bounded, and balanced incremental octree updates for real-time mobile robotics.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Jaemin Yu",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Korea University of Technology and Education (KOREATECH)"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Seongyoon Jeong",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Korea University of Technology and Education (KOREATECH)"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Kang-Wook Chon",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Korea University of Technology and Education (KOREATECH)"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Duksu Kim",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Korea University of Technology and Education (KOREATECH)"
+        }
+      }
+    ],
+    "datePublished": "2026-07-06",
+    "publisher": {
+      "@type": "Organization",
+      "name": "arXiv"
+    },
+    "url": "https://arxiv.org/abs/2607.05092",
+    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
+    "keywords": ["Ego-Centric Octree", "Incremental Octree", "LiDAR mapping", "Range Sensing", "3D sliding window", "Point Cloud", "Mobile Robotics"],
+    "abstract": "Constructing octrees for mobile robots that process continuous point streams in real time poses significant computational and memory challenges. We introduce the Ego-Centric Octree (ECO), a spatial data structure that acts as a 3D sliding window, dynamically bounding the mapping space to the robot's immediate surroundings. ECO uses an efficient incremental update algorithm that categorizes the environment into shift-out, shift-in, and overlap regions. Evaluations on the KITTI benchmark demonstrate that ECO reduces update times by up to 25.60% compared to full static reconstruction and by up to 67.52% compared to a bounded incremental baseline.",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://arxiv.org/abs/2607.05092"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Incremental Octree Construction"
+      },
+      {
+        "@type": "Thing",
+        "name": "LiDAR-based Mobile Robot Mapping"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Korea University of Technology and Education (KOREATECH)",
+    "url": "https://www.koreatech.ac.kr/",
+    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Works Dropdown -->
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
+      <i class="fas fa-flask"></i>
+      More Works
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More Works from Our Lab</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="works-list">
+        <!-- TODO: Replace with your lab's related works (or delete the whole "More Works" section if not needed) -->
+        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Related Work Title 1</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2024</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Related Work Title 2</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2023</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Related Work Title 3</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2023</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">ECO: Incremental Ego-Centric Octree Update for Point Streams</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- TODO: Add each author's personal homepage URL in the href attributes -->
+              <span class="author-block">
+                <a href="https://1drv.ms/b/c/f473192c0bcbfde4/IQBF5bAzdp5oTbwOeNG0NWC8AfE22iEQ-sn1FmDmJRhIyQA?e=bbfhO4" target="_blank">Jaemin Yu</a><sup>&dagger;</sup>,</span>
+              <span class="author-block">
+                <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Seongyoon Jeong</a><sup>&dagger;</sup>,</span>
+              <span class="author-block">
+                <a href="https://sites.google.com/view/bdclab-koreatech/members/professor" target="_blank">Kang-Wook Chon</a><sup>*</sup>,</span>
+              <span class="author-block">
+                <a href="https://sites.google.com/view/duksukim/" target="_blank">Duksu Kim</a><sup>*</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Korea University of Technology and Education (KOREATECH), <a href="https://sites.google.com/view/hpclab/home" target="_blank">SPIN Lab</a>,
+              <a href="https://sites.google.com/view/bdclab-koreatech" target="_blank">BDCLab</a><br>arXiv preprint, 2026</span>
+              <span class="eql-cntrb"><small><br><sup>&dagger;</sup>Equal contribution (co-first authors)&nbsp;&nbsp;<sup>*</sup>Corresponding authors</small></span>
+            </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2607.05092.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                    <!-- TODO: Add your supplementary material PDF or remove this <span class="link-block"> block -->
+                    <span class="link-block">
+                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span>
+
+                  <!-- TODO: Replace with your GitHub repository URL -->
+                  <span class="link-block">
+                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2607.05092" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- TODO: Replace with your teaser video -->
+      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
+        <!-- TODO: Add your video file path here -->
+        <source src="static/videos/video_web.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Constructing octrees for mobile robots that process continuous point streams in real time poses significant computational and memory challenges. Standard global structures often suffer from high latency and unbalanced tree growth. We introduce the <strong>Ego-Centric Octree (ECO)</strong>, a spatial data structure that acts as a 3D sliding window, dynamically bounding the mapping space to the robot's immediate surroundings. ECO uses an efficient incremental update algorithm that categorizes the environment into <em>shift-out</em>, <em>shift-in</em>, and <em>overlap</em> regions, eliminating redundant global coordinate transformations.
+          </p>
+          <p>
+            Evaluations on the KITTI benchmark demonstrate that ECO reduces update times by up to <strong>25.60%</strong> (24.87% on average) compared to full static reconstruction and by up to <strong>67.52%</strong> (54.60% on average) compared to a bounded incremental baseline. Furthermore, ECO substantially lowers the total system latency of downstream tasks, running up to <strong>34.17% faster</strong> than full reconstruction in voxel-map generation. In dynamic scenes, ECO naturally retains a short-term temporal memory of moving objects, providing useful temporal context while keeping update cost bounded and the tree balanced for real-time spatial perception.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Problem formulation -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h2 class="title is-3">Problem Formulation</h2>
+      <img src="static/images/problem_notation.jpg" alt="Notation and problem setup for the Ego-Centric Octree (ECO)" style="max-width: 100%; height: auto;" loading="lazy"/>
+      <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+        Notation and problem setup for maintaining the Ego-Centric Octree (ECO) as a 3D sliding window centered on the robot's current pose P<sub>t</sub>.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End problem formulation -->
+
+
+<!-- Method overview -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h2 class="title is-3">Method Overview</h2>
+      <img src="static/images/overview.jpg" alt="Overview of the incremental ECO update algorithm" style="max-width: 100%; height: auto;" loading="lazy"/>
+      <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+        Overview of the incremental ECO update algorithm, showing the shift-out (R<sub>out</sub>), shift-in (R<sub>in</sub>), and overlap (R<sub>over</sub>) regions as the robot moves from P<sub>t</sub> to P<sub>t+1</sub>.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End method overview -->
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@article{yu2026eco,
+  title   = {ECO: Incremental Ego-Centric Octree Update for Point Streams},
+  author  = {Yu, Jaemin and Jeong, Seongyoon and Chon, Kang-Wook and Kim, Duksu},
+  journal = {arXiv preprint arXiv:2607.05092},
+  year    = {2026}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
